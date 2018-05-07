@@ -25,7 +25,7 @@ public class VehicleController {
 	{
 
 		data.save(vehicle);
-		return "redirect:/website/vehicle/list.html";
+		return "redirect:/website/vehicles/list.html";
 		
 	}
 	
@@ -38,17 +38,18 @@ public class VehicleController {
 
 	} 
 	
-//	@RequestMapping(value="/list.html", method=RequestMethod.GET)	
-//	public ModelAndView vehicles()
-//	{
-//		List<Vehicle> allVehicles = data.findAll();
-//		return new ModelAndView("allVehicles", "vehicles",allVehicles);
-//	}
-//	  
+	@RequestMapping(value="/list.html", method=RequestMethod.GET)	
+	public ModelAndView vehicles()
+	{
+		List<Vehicle> allVehicles = data.findAll();
+		return new ModelAndView("allVehicles", "vehicles",allVehicles);
+	}
+	  
 	@RequestMapping(value="/vehicle/{name}")
 	public ModelAndView showVehicleByName(@PathVariable("name") String name)
 	{
-		throw new UnsupportedOperationException();
+		Vehicle vehicle = data.findByName(name);
+		return new ModelAndView("vehicleInfo", "vehicle", vehicle);
 	}
 	
 }
